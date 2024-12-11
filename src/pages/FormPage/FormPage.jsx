@@ -1,16 +1,14 @@
+import React from "react";
 import Layout from "../../shared/ui/Layout/Layout";
 import FormPageWrapper from "./FormPageWrapper";
 import { Form } from "antd/lib";
 import { Col, Divider, Row } from "antd";
 import { Tooltip } from "../../shared/ui/Tooltip/Tooltip";
 import { formData, formRadioData } from "./form.data";
-import {
-  ElementsList,
-  InputText,
-  RadioGroup,
-  Select,
-} from "../../features/FormItems";
+import { ElementsList } from "../../features/FormItems";
 import { Button } from "../../shared/ui/Button/Button";
+import { colors } from "../../shared/assets/colors";
+import { InputText, RadioGroup, Select } from "../../shared/ui/FormItems";
 
 const FormPage = () => {
   const [form] = Form.useForm();
@@ -38,7 +36,10 @@ const FormPage = () => {
           form={form}
         >
           <Row gutter={5}>
-            <Col flex="auto" span={5}>
+            <Col
+              style={{ display: "flex", flexDirection: "row", gap: 5 }}
+              span={5}
+            >
               Название продукта
               <Tooltip title="Подсказка" />
             </Col>
@@ -107,7 +108,7 @@ const FormPage = () => {
               Соавторы
             </Col>
             <Col flex={2}>
-              <ElementsList name="soauthors" />
+              <ElementsList formName="soauthors" />
             </Col>
           </Row>
 
@@ -126,6 +127,7 @@ const FormPage = () => {
             <Col flex={1}>
               <Button
                 type="primary"
+                buttonColor={colors["light"].color_bright_orange_50}
                 wrapperStyle="button-wrapper"
                 className="button-save"
                 title="Сохранить"

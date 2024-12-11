@@ -1,8 +1,11 @@
+import React from "react";
 import { Tooltip } from "antd";
 import { BiQuestionMark } from "react-icons/bi";
+import { TooltipProps } from "antd/lib";
 
+// type Props = TooltipProps & {};
 
-const TooltipLocal= ({
+const TooltipLocal = ({
   placement,
   trigger,
   overlayStyle,

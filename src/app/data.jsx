@@ -12,6 +12,7 @@ import EmptyPage from "../pages/EmptyPage/EmptyPage";
 import HelpPage from "../pages/HelpPage/HelpPage";
 import TablePage from "../pages/TablePage/TablePage";
 import FormPage from "../pages/FormPage/FormPage";
+import ReportPage from "../pages/ReportPage/ReportPage";
 
 export const routersData = [
   {
@@ -23,11 +24,20 @@ export const routersData = [
   {
     label: "Все документы",
     icon: <BiFileBlank size={20} />,
+    path: "/documents",
     children: [
       {
         label: "Отчетные документы",
         path: "/report",
-        element: <EmptyPage />,
+        element: <ReportPage />,
+        doNotShowChildrenInSidebar: true,
+        children: [
+          {
+            label: "Новый отчет",
+            path: "/new",
+            element: <FormPage />,
+          },
+        ],
       },
       {
         label: "Награждения",
@@ -51,27 +61,72 @@ export const routersData = [
       },
       {
         label: "Регламенты",
+        path: "/reglaments",
         children: [
           {
             label: "Регистрации и использ. мобильных устройств",
+            path: "/registration",
+            element: <EmptyPage />,
           },
           {
             label: "Управление доступом",
+            path: "/access",
+            element: <EmptyPage />,
           },
           {
             label: "Сетевой безопасности",
+            path: "/network",
+            element: <EmptyPage />,
           },
           {
             label: "Защиты АВЗ",
+            path: "/avz",
+            element: <EmptyPage />,
           },
           {
             label: "Резервного копирования и восстановления",
+            path: "/reserv",
+            element: <EmptyPage />,
           },
         ],
       },
       {
         label: "Дополнительно",
         path: "/additional",
+        element: <EmptyPage />,
+      },
+    ],
+  },
+  {
+    label: "Другие документы",
+    icon: <BiFileBlank size={20} />,
+    path: "/x-documents",
+    children: [
+      {
+        label: "Отчетные документы",
+        path: "/report",
+        element: <EmptyPage />,
+        children: [
+          {
+            label: "Регистрации и использ. мобильных устройств",
+            path: "/registration",
+            element: <EmptyPage />,
+          },
+          {
+            label: "Управление доступом",
+            path: "/access",
+            element: <EmptyPage />,
+          },
+        ],
+      },
+      {
+        label: "Награждения",
+        path: "/reward",
+        element: <EmptyPage />,
+      },
+      {
+        label: "Олимпиады",
+        path: "/olympiad",
         element: <EmptyPage />,
       },
     ],

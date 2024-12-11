@@ -1,12 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FormItemWrapper } from "./FormItemWrapper";
 import { Form, Radio } from "antd";
 
-const RatioGroup = ({ data, name }) => {
+// type Props = {
+//   data: any;
+//   name: string;
+// };
+
+const RatioGroup  = ({ data, name }) => {
   const [value, setValue] = useState(1);
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 

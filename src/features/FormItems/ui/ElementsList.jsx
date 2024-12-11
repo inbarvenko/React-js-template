@@ -1,23 +1,31 @@
+import React from "react";
 import { Form } from "antd/lib";
 import { Checkbox, Col, Row } from "antd";
 import { Button } from "../../../shared/ui/Button/Button";
 import { Tooltip } from "../../../shared/ui/Tooltip/Tooltip";
-import { FormItemWrapper } from "./FormItemWrapper";
-import SelectLocal from "./Select";
 import { formData } from "../../../pages/FormPage/form.data";
 import { BiMinusCircle, BiPlus } from "react-icons/bi";
+import { ElementsListWrapper } from "./ElementsListWrapper";
+import { Select } from "../../../shared/ui/FormItems";
 
+// type Props = {
+//   formName: string;
+// };
 
-const ElementsList = ({ name }) => {
+// Важно не запутаться в key для полей формы,
+// иначе функции удаления и добавления будут работать некорректно
+
+const ElementsList = ({ formName }) => {
+  const [data, setData] = React.useState(formData);
+
   return (
-    <FormItemWrapper>
-      <Form.List name={name}>
+    <ElementsListWrapper>
+      <Form.List name={formName}>
         {(fields, { add, remove }) => (
           <>
             {fields.map(({ key, name, ...restFields }, index) => (
               <div key={key}>
                 <Row
-                  key={index}
                   align="middle"
                   style={{
                     display: "flex",
@@ -28,14 +36,17 @@ const ElementsList = ({ name }) => {
                   <Col flex={1}>
                     <Row key={"flex-row"} className="flex-row">
                       <Col flex={1}>
-                        <Form.Item name={"name"} {...restFields}>
-                          <SelectLocal
+                        <Form.Item {...restFields}>
+                          <Select
                             allowClear
                             filterOption={false}
                             placeholder="Соавтор продукта"
-                            options={formData}
+                            options={data}
                             style={{ width: "100%" }}
                             fieldNames={{ label: "name", value: "name" }}
+                            onChange={(value) => {
+                              console.log(value);
+                            }}
                             optionRender={(option) => {
                               return (
                                 <div key={option.data.name}>
@@ -83,7 +94,7 @@ const ElementsList = ({ name }) => {
           </>
         )}
       </Form.List>
-    </FormItemWrapper>
+    </ElementsListWrapper>
   );
 };
 

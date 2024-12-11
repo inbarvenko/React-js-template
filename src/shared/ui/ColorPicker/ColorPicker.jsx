@@ -1,4 +1,5 @@
-import { ColorPicker as AntdColorPicker, Col, Divider, Row } from "antd";;
+import { ColorPicker as AntdColorPicker, Col, Divider, Row } from "antd";
+import React from "react";
 
 import { presets } from "../../constants/presets";
 

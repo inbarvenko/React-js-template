@@ -1,4 +1,4 @@
 export const ThemeEnum = {
-    light: 'light',
-    dark: 'dark',
-};
+    light: "light",
+    dark: "dark"
+}

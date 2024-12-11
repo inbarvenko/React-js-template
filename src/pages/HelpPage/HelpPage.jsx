@@ -1,10 +1,10 @@
+import React from "react";
 import { BiPhone } from "react-icons/bi";
 
 import Layout from "../../shared/ui/Layout/Layout";
 import HelpPageWrapper from "./HelpPageWrapper";
 
 const HelpPage = () => {
-  console.log("helps");
   const reglaments = [
     { reglamentName: "Регламент 1", reglamentLink: "" },
     { reglamentName: "Регламент 2", reglamentLink: "" },

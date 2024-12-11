@@ -1,8 +1,18 @@
+import React from "react";
 import { Helmet } from "react-helmet";
 import { BiCog } from "react-icons/bi";
 
 import { colors } from "../../assets/colors";
 import LayoutWrapper from "./LayoutWrapper";
+
+// type Props = {
+//   title?: string;
+//   settings?: boolean;
+//   headerClassName?: string;
+//   bodyClassName?: string;
+//   onSettingsClick?: () => void;
+//   children?: React.ReactNode;
+// };
 
 const Layout = ({
   title,

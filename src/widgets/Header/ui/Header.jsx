@@ -1,3 +1,4 @@
+import React from "react";
 import HeaderWrapper from "./HeaderWrapper";
 import { Logo } from "../../../shared/assets/svg";
 

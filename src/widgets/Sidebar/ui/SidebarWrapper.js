@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 import { colors } from "../../../shared/assets/colors";
 
+// type Props = {
+//   collapsed: boolean;
+//   themelocal: ThemeEnum;
+// };
+
 const SidebarWrapper = styled.div.withConfig({
   shouldForwardProp: (prop) => !["collapsed", "themelocal"].includes(prop),
 })`

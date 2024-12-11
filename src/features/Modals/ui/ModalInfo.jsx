@@ -1,5 +1,10 @@
 import Modal from "./Modal";
 
+// type Props = ModalProps & {
+//   title: string;
+//   description?: string;
+// };
+
 const ModalInfo = ({ title, description, ...props }) => (
   <Modal {...props}>
     <div className="body-info">

@@ -4,6 +4,10 @@ import { useState } from "react";
 
 import Modal from "./Modal";
 
+// type Props = ModalProps & {
+//   event: ModalEventType;
+// };
+
 const { RangePicker } = DatePicker;
 
 const ModalEvent = ({

@@ -1,13 +1,28 @@
 import Lottie from "lottie-react";
+import React, { useEffect } from "react";
 
-import animation from "../../shared/assets/animations/loading_main_2.json";
+import animation from "../../shared/assets/animations/main_loading.json";
 import LoadingPageWrapper from "./LoadingPageWrapper";
 
-const LoadingPage = () => {
-  console.log("loading");
+// type Props = {
+//   isLoading?: boolean;
+//   onFadeOutComplete?: () => void;
+// };
+
+const LoadingPage = ({
+  isLoading,
+  onFadeOutComplete,
+}) => {
+  
+  useEffect(() => {
+    if (!isLoading && onFadeOutComplete) {
+      const timer = setTimeout(onFadeOutComplete, 300); // Длительность анимации исчезновения
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, onFadeOutComplete]);
 
   return (
-    <LoadingPageWrapper>
+    <LoadingPageWrapper isLoading={isLoading || false}>
       <Lottie animationData={animation} loop autoplay />
     </LoadingPageWrapper>
   );

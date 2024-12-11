@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Logo from "../../../shared/assets/svg/head-novator.svg";
 import { routersData } from "../../../app/data";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,6 +12,23 @@ const Sidebar = () => {
   const buttonRef = useRef(null);
   const navigate = useNavigate();
   const localion = useLocation();
+
+  const openLocationSubmenus = useCallback(() => {
+    let previousPath = "";
+
+    const locationSplit = localion.pathname
+      .split("/")
+      .filter((item) => item.length);
+
+    locationSplit.pop();
+
+    const locationPaths = locationSplit.map((item) => {
+      previousPath += "/" + item;
+      return previousPath;
+    });
+
+    locationPaths.forEach((item, index) => toggleSubmenu(item, index));
+  }, [localion]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,15 +51,27 @@ const Sidebar = () => {
     setOpenSubmenus([]);
   };
 
-  const toggleSubmenu = (path) => {
+  const toggleSubmenu = (path, level = 0) => {
     const isOpen = openSubmenus.includes(path);
 
-    if (isOpen) {
-      setOpenSubmenus(openSubmenus.filter((item) => item !== path));
+    if (level === 0) {
+      if (isOpen) {
+        setOpenSubmenus([]);
+        return;
+      }
+
+      setOpenSubmenus([path]);
       return;
     }
 
-    setOpenSubmenus([...openSubmenus, path]);
+    if (isOpen) {
+      setOpenSubmenus((prevSubmenus) =>
+        prevSubmenus.filter((item) => !item.startsWith(path)),
+      );
+      return;
+    }
+
+    setOpenSubmenus((prevSubmenus) => [...prevSubmenus, path]);
   };
 
   const onProfileClick = () => {
@@ -50,34 +79,47 @@ const Sidebar = () => {
   };
 
   const renderItems = (items, level = 0, parentPath = "") =>
-    items.map((item, index) => {
-      const currentPath = `${parentPath}${index}-`;
+    items.map((item) => {
+      const currentPath = `${parentPath}${item.path}`;
       const isOpen = openSubmenus.includes(currentPath);
+      const isCurrentPath =
+        ((!openSubmenus.length || level !== 0) &&
+          localion.pathname === currentPath) ||
+        isOpen;
       const context = minimize ? item.icon : item.label;
 
       const openSubmenu = (e) => {
         e.stopPropagation();
-
         setMinimize(false);
-        toggleSubmenu(currentPath);
+
+        if (
+          localion.pathname !== "/" &&
+          localion.pathname.startsWith(currentPath)
+        ) {
+          openLocationSubmenus();
+          return;
+        }
+
+        toggleSubmenu(currentPath, level);
       };
 
       const navigateOnClick = () => {
-        navigate(item.path || "/");
+        if (location.pathname === currentPath) return;
+
+        navigate(currentPath || "/");
         setOpenSubmenus([]);
       };
-
-      const isCurrentPath =
-        (localion.pathname === item.path &&
-          !Object.keys(openSubmenus).length) ||
-        isOpen;
 
       return (
         <li key={currentPath} className="sidebar-item">
           <div
             ref={buttonRef}
             className={` ${isCurrentPath ? "menu-item-active" : "menu-item"} item-level-${level}`}
-            onClick={item.children?.length ? openSubmenu : navigateOnClick}
+            onClick={
+              item.children?.length && !item.doNotShowChildrenInSidebar
+                ? openSubmenu
+                : navigateOnClick
+            }
             style={{
               transition: "0.3s",
             }}
@@ -85,20 +127,22 @@ const Sidebar = () => {
             {context}
           </div>
 
-          {item.children?.length && isOpen && (
-            <ul
-              className={`submenu level-${level + 1}`}
-              style={
-                minimize && level === 0
-                  ? { marginLeft: 60 }
-                  : { marginLeft: 200 }
-              }
-            >
-              <div className="submenu-title">{item.label}</div>
+          {item.children?.length &&
+            !item.doNotShowChildrenInSidebar &&
+            isOpen && (
+              <ul
+                className={`submenu level-${level + 1}`}
+                style={
+                  minimize && level === 0
+                    ? { marginLeft: 60 }
+                    : { marginLeft: 200 }
+                }
+              >
+                <div className="submenu-title">{item.label}</div>
 
-              {renderItems(item.children, level + 1, currentPath)}
-            </ul>
-          )}
+                {renderItems(item.children, level + 1, currentPath)}
+              </ul>
+            )}
         </li>
       );
     });

@@ -1,4 +1,7 @@
-import { Tour } from "antd";
+import { Tour, TourProps } from "antd";
+import React from "react";
+
+// type Props = TourProps & {};
 
 const TourLocal = (props) => <Tour {...props} />;
 
