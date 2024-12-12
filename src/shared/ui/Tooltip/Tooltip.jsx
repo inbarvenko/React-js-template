@@ -1,14 +1,12 @@
 import React from "react";
 import { Tooltip } from "antd";
 import { BiQuestionMark } from "react-icons/bi";
-import { TooltipProps } from "antd/lib";
 
 // type Props = TooltipProps & {};
 
 const TooltipLocal = ({
   placement,
   trigger,
-  overlayStyle,
   children,
   ...props
 }) => {
@@ -16,10 +14,9 @@ const TooltipLocal = ({
     <Tooltip
       placement={placement || "right"}
       trigger={trigger || "hover"}
-      overlayStyle={overlayStyle || { minWidth: "300px" }}
       {...props}
     >
-      <div>{children || <BiQuestionMark />}</div>
+      {children || <BiQuestionMark size={20} />}
     </Tooltip>
   );
 };

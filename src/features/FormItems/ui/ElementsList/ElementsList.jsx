@@ -1,12 +1,13 @@
 import React from "react";
 import { Form } from "antd/lib";
 import { Checkbox, Col, Row } from "antd";
-import { Button } from "../../../shared/ui/Button/Button";
-import { Tooltip } from "../../../shared/ui/Tooltip/Tooltip";
-import { formData } from "../../../pages/FormPage/form.data";
+
 import { BiMinusCircle, BiPlus } from "react-icons/bi";
+
 import { ElementsListWrapper } from "./ElementsListWrapper";
-import { Select } from "../../../shared/ui/FormItems";
+import { Select } from "../../../../shared/ui/FormItems";
+import { Button } from "../../../../shared/ui/Button/Button";
+import { Tooltip } from "../../../../shared/ui/Tooltip/Tooltip";
 
 // type Props = {
 //   formName: string;
@@ -15,7 +16,7 @@ import { Select } from "../../../shared/ui/FormItems";
 // Важно не запутаться в key для полей формы,
 // иначе функции удаления и добавления будут работать некорректно
 
-const ElementsList = ({ formName }) => {
+const ElementsList = ({ formName, formData }) => {
   const [data, setData] = React.useState(formData);
 
   return (
@@ -23,7 +24,7 @@ const ElementsList = ({ formName }) => {
       <Form.List name={formName}>
         {(fields, { add, remove }) => (
           <>
-            {fields.map(({ key, name, ...restFields }, index) => (
+            {fields.map(({ key, name, ...restFields }) => (
               <div key={key}>
                 <Row
                   align="middle"
