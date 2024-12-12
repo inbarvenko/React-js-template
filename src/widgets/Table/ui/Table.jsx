@@ -103,7 +103,7 @@ const Table = ({ data, columnDefs, ...props }) => {
         pagination
         enableCharts
         className="ag-theme-quartz"
-        containerStyle={{ height: "auto", width: '100%' }}
+        containerStyle={{ height: "auto", width: "100%" }}
         suppressClickEdit={props.editing}
         localeText={AG_GRID_LOCALE_RU}
         defaultColDef={defaultColDef}

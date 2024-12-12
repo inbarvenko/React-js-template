@@ -9,13 +9,7 @@ import { Tooltip } from "../../../../shared/ui/Tooltip/Tooltip";
 //   divider?: boolean;
 // };
 
-const FormItem = ({
-  title,
-  divider,
-  tooltip,
-  children,
-  ...formItemProps
-}) => {
+const FormItem = ({ title, divider, tooltip, children, ...formItemProps }) => {
   return (
     <>
       <Row>
@@ -32,6 +26,7 @@ const FormItem = ({
           {title}
           {tooltip && <Tooltip title={tooltip} />}
         </Col>
+
         <Col className="input-text" flex={1}>
           <Form.Item className="form-item" name="KP_code" {...formItemProps}>
             {children}

@@ -1,6 +1,6 @@
-import { Helmet } from "react-helmet";
-import Lottie from "lottie-react";
 import ErrorCardWrapper from "./ErrorCardWrapper";
+import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 
 // type Props = {
 //   title: string;
@@ -14,6 +14,7 @@ const ErrorCard = ({ title, text, animation }) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
+
       <div className="layout">
         <Lottie animationData={animation} loop autoplay />
 
